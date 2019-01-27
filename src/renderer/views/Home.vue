@@ -8,7 +8,9 @@
         ></v-text-field>
       </v-flex>
       <v-flex xs2>
-        <v-btn @click.prevent="addItem" color="success">send</v-btn>
+        <v-btn @click.prevent="addItem" color="success">addItem</v-btn>
+        <v-btn @click.prevent="getAll" color="success">getAll</v-btn>
+        <v-btn @click.prevent="insertSingle" color="success">insertSingle</v-btn>
       </v-flex>
       <v-flex xs6>
         <ul>
@@ -32,6 +34,12 @@
       addItem() {
         // send item to main process
         this.$ipc.send('item:add', this.input)
+      },
+      getAll() {
+        this.$ipc.send('snippet:getAll')
+      },
+      insertSingle() {
+        this.$ipc.send('snippet:insertSingle', {})
       }
     },
     mounted() {

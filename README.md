@@ -1,4 +1,4 @@
-# electron - vuetify - template
+# twiki - a tag based private wiki
 
 ## Project setup
 ```
