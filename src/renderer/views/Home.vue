@@ -11,6 +11,7 @@
         <v-btn @click.prevent="addItem" color="success">addItem</v-btn>
         <v-btn @click.prevent="getAll" color="success">getAll</v-btn>
         <v-btn @click.prevent="insertSingle" color="success">insertSingle</v-btn>
+        <v-btn @click.prevent="searchTag" color="success">search tag</v-btn>
       </v-flex>
       <v-flex xs6>
         <ul>
@@ -40,6 +41,9 @@
       },
       insertSingle() {
         this.$ipc.send('snippet:insertSingle', {})
+      },
+      searchTag() {
+        this.$ipc.send('search:tag', 'tag4 y')
       }
     },
     mounted() {
