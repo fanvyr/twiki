@@ -1,6 +1,5 @@
 <template>
   <v-app>
-
     <v-navigation-drawer 
     fixed
     class="grey lighten-4"
@@ -28,7 +27,11 @@
 
 <script>
 
+ import './plugins/SnippetController.js'
+
 export default {
+  components: {
+  },
   name: 'App',
   data () {
     return {

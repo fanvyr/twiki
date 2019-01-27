@@ -1,7 +1,7 @@
 import { ipcMain as ipc } from 'electron'
 import db from '../model/Database'
 
-ipc.on('snippet:getAll', async () => {
+ipc.on('snippet:getAll', async (e) => {
   console.log('backend got snippet:getAll request')
 
   const result = await db.snippets.find({}, {
@@ -14,6 +14,8 @@ ipc.on('snippet:getAll', async () => {
   })
   
   console.log('db query results: ', result)
+  e.sender.send('snippet:receiveAll', result)
+  
 })
 
 
