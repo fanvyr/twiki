@@ -1,6 +1,8 @@
 import { ipcMain as ipc } from 'electron'
 import db from '../model/Database'
 
+
+
 ipc.on('snippet:getAll', async (e) => {
   console.log('backend got snippet:getAll request')
 
@@ -13,25 +15,26 @@ ipc.on('snippet:getAll', async (e) => {
     updatedAt: 1 
   })
   
-  console.log('db query results: ', result)
+  // console.log('db query results: ', result)
   e.sender.send('snippet:receiveAll', result)
   
 })
 
 
-ipc.on('snippet:getSingle', async(e, id) => {
+ipc.on('snippet:loadSingle', async(e, id) => {
   const result = await db.snippets.findOne({_id: id})
 
   // #TODO: return single document
   console.log('found a single document: ', result)
+  e.sender.send('snippet:SingleSelected', result)
 })
 
 
 ipc.on('snippet:insertSingle', async(e, item) => {
-  // const newItem = await db.snippets.insert({
+  // let newItem = await db.snippets.insert({
   //   title: 'my first xxxxxyz',
   //   description: 'description of my first snippet',
-  //   body: 'asdf asdf asdf asdf asdf body',
+  //   body: '# ich bin der title',
   //   tags: ['tag1', 'tag2', 'tag3', 'tag4']
   // })
 
@@ -52,3 +55,4 @@ ipc.on('snippet:updateSingle', async(e, item) => {
 
   // #TODO: return updated item
 })
+

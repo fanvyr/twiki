@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcRenderer } from 'electron'
 import {
   createProtocol,
   installVueDevtools
@@ -75,6 +75,7 @@ app.on('ready', async () => {
     await installVueDevtools()
   }
   createWindow()
+  ipcRenderer.send('snippet:getAll')
 })
 
 // Exit cleanly on request from parent process in development mode.
@@ -93,6 +94,7 @@ if (isDevelopment) {
 }
  
 import './main/controller'
+
 
 // OWN IMPLEMENTED STUFF
 // WHERE TO PUT?!

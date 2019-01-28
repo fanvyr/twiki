@@ -1,6 +1,9 @@
+/* eslint-disable */
+
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import SnippetDashboard from './views/Snippet/Dashboard'
 
 Vue.use(Router)
 
@@ -10,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'Snippet Dashboard',
+      component: SnippetDashboard
     },
     {
       path: '/about',
