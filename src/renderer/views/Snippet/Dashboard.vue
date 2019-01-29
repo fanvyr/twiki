@@ -77,7 +77,7 @@ export default {
         title: 'some titel',
         description: 'how to implement a cool video',
         body: '# im a header  ## im something else',
-        tags: ['tag6', 'tag3', 'tag7']
+        tags: ['nom', 'xnom', 'asdf']
       })
     },
     handleResize() {

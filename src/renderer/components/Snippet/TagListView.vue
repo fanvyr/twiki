@@ -8,7 +8,13 @@
     :style="{height: height + 'px', minHeight: height + 'px'}"
   >
     <v-subheader outset>Mostly used Tags</v-subheader>
-    <v-list-tile @click="" v-for="(tag, i) in tagList" :key="i" ripple>
+    <v-list-tile 
+    @click="" 
+    v-for="(tag, i) in tagList" 
+    :key="i" 
+    ripple
+    
+    >
       <v-list-tile-content>
         <v-list-tile-title>{{tag.tag}}</v-list-tile-title>
         <v-list-tile-sub-title>
@@ -55,4 +61,9 @@ export default {
 .vList {
   overflow-y: scroll;
 }
+
+.listTileActiveClass {
+  background-color: #fff;
+}
 </style>
+
