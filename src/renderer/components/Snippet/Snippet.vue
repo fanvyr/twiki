@@ -34,6 +34,9 @@ export default {
     ipc.on("snippet:SingleSelected", (e, payload) => {
       this.snippet = payload
     });
+  },
+  destroyed() {
+    ipc.removeAllListeners()
   }
 };
 </script>

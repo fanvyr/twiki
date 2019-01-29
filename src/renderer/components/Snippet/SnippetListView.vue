@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     sendSelectedSnippet(_id) {
-      this.$emit('snippetSelected', _id)
       ipc.send('snippet:loadSingle', _id)
     }
   },
