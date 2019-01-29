@@ -7,7 +7,7 @@
     :style="{height: height + 'px', minHeight: height + 'px'}"
   >
     <v-subheader outset>Snippets</v-subheader>
-    <v-list-tile @click="sendSelectedSnippet(snippet._id)" v-for="(snippet, i) in snippetList" :key="i" ripple>
+    <v-list-tile @click="sendSelectedSnippet(snippet._id)" v-for="(snippet, i) in filteredSnippetList" :key="i" ripple>
       <v-list-tile-content>
         <v-list-tile-title>{{snippet.title}}</v-list-tile-title>
         <v-list-tile-sub-title v-html="snippet.description"/>
@@ -25,6 +25,9 @@ export default {
     height: {
       type: Number,
       default: 0
+    },
+    searchInput: {
+      type: Array
     }
   },
   components: {
@@ -45,6 +48,20 @@ export default {
     snippetList() {
       return this.$store.getters["snippets/getAll"];
     },
+    filteredSnippetList() {
+      // enthält die snippet tag list all searchinputs?
+
+      return this.snippetList.filter(snippet => {
+        return this.searchInput.every(searchTag => {
+          return snippet.tags.some(tagInSnippet =>  {
+            return tagInSnippet === searchTag}
+            )
+        })
+      })
+    },
+    test() {
+
+    }
   }
 };
 </script>

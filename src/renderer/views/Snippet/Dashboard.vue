@@ -18,7 +18,7 @@
         <v-flex xs12 align-self-center>
           <v-layout row wrap>
             <v-flex xs8>
-              <tag-search/>
+              <tag-search @updatedSearchTags="handleUpdatedSearchInput"/>
             </v-flex>
             <v-flex xs4>
               <v-btn @click="addItem" transparent color="success">Add Snippet</v-btn>
@@ -34,7 +34,7 @@
           <tag-list-view :height="elementHeight"/>
         </v-flex>
         <v-flex xs3 md2 align-end pl-1>
-          <snippet-list-view :height="elementHeight" @snippetSelected="loadSingleSnippet"/>
+          <snippet-list-view :searchInput="searchInput" :height="elementHeight" @snippetSelected="loadSingleSnippet"/>
         </v-flex>
         <v-flex xs6 md8 align-end pl-1>
           <snippet :height="elementHeight" :snippet="snippet"/>
@@ -65,7 +65,8 @@ export default {
   data() {
     return {
       elementHeight: 0,
-      snippet: { title: "test", body: "# ich bin n title" }
+      snippet: { title: "test", body: "# ich bin n title" },
+      searchInput: []
     };
   },
   methods: {
@@ -76,7 +77,7 @@ export default {
         title: 'some titel',
         description: 'how to implement a cool video',
         body: '# im a header  ## im something else',
-        tags: ['tag6', 'tag2', 'tag4']
+        tags: ['tag6', 'tag3', 'tag7']
       })
     },
     handleResize() {
@@ -84,7 +85,11 @@ export default {
     },
     loadSingleSnippet(_id) {
       console.log("requesting snippet: ", _id);
+    },
+    handleUpdatedSearchInput(newSearchInput) {
+      this.searchInput = newSearchInput
     }
+
   },
   computed: {
     selectedSnippet() {}

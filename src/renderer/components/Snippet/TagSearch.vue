@@ -54,10 +54,12 @@ export default {
           return input === availTag.tag
         }) ? false : true
 
-      }).sort((a, b) => { 
-        console.log(a, b)
-        a.count > b.count ? 1 : b.count > a.count ? -1 : 0
-        });
+      })
+    }
+  },
+  watch: {
+    searchInput(searchInput) {
+      this.$emit('updatedSearchTags', searchInput)
     }
   }
 };
