@@ -6,18 +6,19 @@ function buildTagList(state) {
   console.time('rebuild-tag-list')
 
   let tagList = []
+
+
   state.snippets.map(snippet => { return snippet.tags }).forEach(snippetTags => {
     snippetTags.forEach(tag => {
-      // tagList.filter(tagItem => { tagItem.tag === tag })[0] !== undefined ? 
-      let index = tagList.findIndex(item => item.tag === tag)
-      index !== -1 ? tagList[index].count++ : tagList.push({tag, count: 1})
+      let item = tagList.find(item => item.tag === tag)
+      item !== undefined ? item.count ++ : tagList.push({tag, count: 1})
     })
   })
-  state.tagList = tagList
+  
+  state.tagList = tagList.sort((a, b) => b.count - a.count);
 
 
-  console.timeEnd('rebuild-tag-list')
-
+  console.timeEnd('rebuild-tag-list') 
 }
 
 
@@ -32,7 +33,9 @@ export default {
 
   mutations: {
     setSnippets(state, payload) {
+
       state.snippets = payload
+
       buildTagList(state)
     },
     updateSingle(state, payload) {
@@ -53,6 +56,9 @@ export default {
     },
     loadSingleSnippet({commit}, payload) {
       
+    },
+    addSnippet({commit}, payload) {
+      ipc.send('snippet:insertSingle', payload)
     }
 
   },

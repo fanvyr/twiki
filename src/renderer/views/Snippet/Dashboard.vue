@@ -13,12 +13,21 @@
   <v-container fluid fill-height>
     <v-layout column fill-height>
       <v-layout row wrap pl-2 pr-2>
-        <v-flex xs12>
-          <p>asdf</p>
+
+        <!-- 1. row: tag autocomplete -->
+        <v-flex xs12 align-self-center>
+          <v-layout row wrap>
+            <v-flex xs8>
+              <tag-search/>
+            </v-flex>
+            <v-flex xs4>
+              <v-btn @click="addItem" transparent color="success">Add Snippet</v-btn>
+            </v-flex>
+          </v-layout>
         </v-flex>
-        <v-flex xs12>
-          <p>asdf</p>
-        </v-flex>
+
+        <!-- 2. row: presets -->
+        <v-flex xs12></v-flex>
       </v-layout>
       <v-layout row fill-height wrap>
         <v-flex xs3 md2 align-end ref="heightRefFlex" pl-1>
@@ -29,7 +38,7 @@
         </v-flex>
         <v-flex xs6 md8 align-end pl-1>
           <snippet :height="elementHeight" :snippet="snippet"/>
-        </v-flex> 
+        </v-flex>
       </v-layout>
     </v-layout>
   </v-container>
@@ -42,6 +51,7 @@
 import TagListView from "../../components/Snippet/TagListView";
 import SnippetListView from "../../components/Snippet/SnippetListView";
 import Snippet from "../../components/Snippet/Snippet";
+import TagSearch from "../../components/Snippet/TagSearch";
 
 export default {
   // component: list of most used tags
@@ -49,7 +59,8 @@ export default {
   components: {
     TagListView,
     SnippetListView,
-    Snippet
+    Snippet,
+    TagSearch
   },
   data() {
     return {
@@ -60,6 +71,13 @@ export default {
   methods: {
     addItem() {
       console.log("addItem clicked");
+
+      this.$store.dispatch('snippets/addSnippet', {
+        title: 'some titel',
+        description: 'how to implement a cool video',
+        body: '# im a header  ## im something else',
+        tags: ['tag6', 'tag2', 'tag4']
+      })
     },
     handleResize() {
       this.elementHeight = this.$refs.heightRefFlex.clientHeight;
